@@ -1,0 +1,18 @@
+UNIX serproxy installation instructions
+---------------------------------------
+
+Source distribution
+-------------------
+1. Unpack the sources.
+2. 'cd' into the source directory
+3. Type 'make' to compile
+4. If all goes well, become root and type 'make install',
+   which will install the 'serproxy' binary to /usr/local/bin
+5. Copy the config file 'serproxy.cfg' to /etc
+6. Edit /etc/serproxy.cfg to configure the proxy.
+   
+Binary distribution
+-------------------
+1. Copy the serproxy binary to /usr/local/bin
+2. Follow steps 5 & 6 for the source distribution above.
+

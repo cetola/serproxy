@@ -1,0 +1,5 @@
+- Remote control of DTR/CTS/etc lines.
+- Syslog debugging output under Linux.
+- Win32 version may work better with a WaitForMultipleObjects call rather
+  than the current polling of the serial port (Linux version uses select()).
+- Option to only allow access from specific hosts.

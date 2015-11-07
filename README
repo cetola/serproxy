@@ -1,0 +1,134 @@
+
+Serproxy
+--------
+
+Author: Stefano Busti (sbusti@nildram.co.uk)
+
+Serproxy is a GPL multi-threaded proxy program for redirecting
+network socket connections to/from serial links, in cases where
+the remote end of the serial link doesn't have a TCP/IP
+stack (eg an embedded or microcontroller system).
+The proxy allows other hosts on the network to communicate
+with the system on the remote end of the serial link.
+When run, it listens for incoming connections on a number of tcp
+ports. Whenever a connection is made data is proxied to and from
+that connection to a serial port.
+
+
+Installation
+------------
+
+See the files INSTALL-unix and INSTALL-win32.txt for windows/unix
+installation instructions.
+
+I have only tested the unix version under RedHat Linux 6.0, 
+compiling under other unices will probably involve delving into
+the Makefile/source code. Also, the pthread library is needed
+to compile/run.
+
+
+Configuration directives
+------------------------
+
+Serproxy can be configured via the configuration file "serproxy.cfg".
+Comments are allowed by starting a line with the '#' character.
+The configuration file supports the following directives:
+
+---------------------------------------------------------------------
+comm_ports=<list>
+
+Used to configure which comm ports serproxy will use. 
+<list> is a comma-separated list of port numbers, where 1 corresponds
+to ttyS0/COM1, 2 corresponds to ttyS1/COM2, etc.
+
+Example:
+
+# Use ttyS0 and ttyS2
+comm_ports=1,3
+
+---------------------------------------------------------------------
+comm_baud=<n>
+
+Sets the default baud rate for serial connections.
+
+Example:
+
+# Use 38400 baud
+comm_baud=38400
+
+---------------------------------------------------------------------
+comm_databits=<n>
+
+Sets the default number of data bits.
+
+Example:
+
+# Use 8 data bits
+comm_databits=8
+
+---------------------------------------------------------------------
+comm_stopbits=<n>
+
+Sets the default number of stop bits. Possible values are 1 or 2.
+
+Example:
+
+# Use 1 stop bit
+comm_stopbits=1
+
+---------------------------------------------------------------------
+comm_parity=<p>
+
+Sets the default parity. Possible values are "none", "even" and "odd"
+
+Example:
+
+# No parity
+comm_parity=none
+
+---------------------------------------------------------------------
+timeout=<n>
+
+If a client is idle for more than <n> seconds, he will be
+disconnected.
+
+Example:
+
+# Time out after 300 seconds
+timeout=300
+
+---------------------------------------------------------------------
+net_port<x>=<n>
+
+Used to map tcp port numbers to serial port numbers. These define
+which serial ports serproxy tries to open when it detects a tcp
+network connection on a socket for proxying. <x> is the serial
+port number, <n> is the tcp port number.
+
+Example:
+
+# Proxy ttyS0/COM1 to/from tcp port 5331
+net_port1=5331
+
+# Proxy ttyS2/COM3 to/from tcp port 5333
+net_port3=5333
+
+---------------------------------------------------------------------
+Port-specific settings
+
+The baud rate, data bits, stop bits and timeout values can also be
+configured individually for each serial port. This is achieved
+by appending a port number to the end of a particular directive.
+
+Example:
+
+# Override the global settings for ttyS0
+comm_baud1=14400
+
+# Override the global settings for ttyS2/COM3
+comm_baud3=9600
+comm_databits3=7
+comm_stopbits3=2
+comm_parity3=odd
+timeout3=100
+

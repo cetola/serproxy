@@ -1,0 +1,17 @@
+WIN32 serproxy installation instructions
+----------------------------------------
+
+From sources:
+
+1. Unpack the sources.
+2. Compile the 'win32/serproxy.dsw' workspace with VC6.
+3. Edit serproxy.cfg to configure the proxy.
+4. Make sure serproxy.cfg is in the same folder as serproxy.exe
+   before running.
+
+
+From pre-compiled binaries:
+
+1. Unzip files to a folder.
+2. Edit serproxy.cfg to configure the proxy.
+   
